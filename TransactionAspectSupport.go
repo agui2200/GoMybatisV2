@@ -1,12 +1,12 @@
-package GoMybatis
+package GoMybatisV2
 
 import (
 	"context"
 	"fmt"
-	"github.com/agui2200/GoMybatis/logger"
-	"github.com/agui2200/GoMybatis/sessions"
-	"github.com/agui2200/GoMybatis/sessions/tx"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/logger"
+	"github.com/agui2200/GoMybatisV2/sessions"
+	"github.com/agui2200/GoMybatisV2/sessions/tx"
+	"github.com/agui2200/GoMybatisV2/utils"
 	"reflect"
 	"strings"
 )

@@ -39,7 +39,7 @@ Database Driven List
  
 ## Using tutorials
 
-> Sample source code https://github.com/agui2200/GoMybatis/tree/master/example
+> Sample source code https://github.com/agui2200/GoMybatisV2/tree/master/example
 
 Set up GoPath and download GoMybatis and the corresponding database driver with the go get command
 ```

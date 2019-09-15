@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/utils"
 )
 
 //判断节点

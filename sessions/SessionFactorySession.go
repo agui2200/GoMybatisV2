@@ -2,8 +2,8 @@ package sessions
 
 import (
 	"context"
-	"github.com/agui2200/GoMybatis/sessions/tx"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/sessions/tx"
+	"github.com/agui2200/GoMybatisV2/utils"
 )
 
 type SessionFactorySession struct {

@@ -2,7 +2,7 @@ package sqlbuilder
 
 import (
 	"fmt"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/utils"
 	"testing"
 	"time"
 )

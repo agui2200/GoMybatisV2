@@ -1,7 +1,7 @@
 package engines
 
 import (
-	"github.com/agui2200/GoMybatis/example"
+	"github.com/agui2200/GoMybatisV2/example"
 	"testing"
 )
 

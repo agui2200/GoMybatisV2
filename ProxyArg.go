@@ -1,4 +1,4 @@
-package GoMybatis
+package GoMybatisV2
 
 import "reflect"
 

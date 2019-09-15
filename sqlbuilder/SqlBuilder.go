@@ -1,8 +1,8 @@
 package sqlbuilder
 
 import (
-	"github.com/agui2200/GoMybatis/logger"
-	"github.com/agui2200/GoMybatis/templete/ast"
+	"github.com/agui2200/GoMybatisV2/logger"
+	"github.com/agui2200/GoMybatisV2/templete/ast"
 )
 
 func New(engine ast.ExpressionEngine, logEnable bool, logger logger.Log) SqlBuilder {

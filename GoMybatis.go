@@ -1,14 +1,14 @@
-package GoMybatis
+package GoMybatisV2
 
 import (
 	"bytes"
 	"context"
-	"github.com/agui2200/GoMybatis/sessions"
-	"github.com/agui2200/GoMybatis/sqlbuilder"
-	"github.com/agui2200/GoMybatis/templete"
-	"github.com/agui2200/GoMybatis/templete/ast"
-	"github.com/agui2200/GoMybatis/utils"
-	"github.com/agui2200/GoMybatis/xml"
+	"github.com/agui2200/GoMybatisV2/sessions"
+	"github.com/agui2200/GoMybatisV2/sqlbuilder"
+	"github.com/agui2200/GoMybatisV2/templete"
+	"github.com/agui2200/GoMybatisV2/templete/ast"
+	"github.com/agui2200/GoMybatisV2/utils"
+	"github.com/agui2200/GoMybatisV2/xml"
 	"github.com/beevik/etree"
 	"log"
 	"reflect"

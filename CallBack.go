@@ -1,7 +1,7 @@
-package GoMybatis
+package GoMybatisV2
 
 import (
-	"github.com/agui2200/GoMybatis/sessions"
+	"github.com/agui2200/GoMybatisV2/sessions"
 	"reflect"
 )
 

@@ -1,4 +1,4 @@
-module github.com/agui2200/GoMybatis.v2
+module github.com/agui2200/GoMybatisV2
 
 require (
 	github.com/Knetic/govaluate v3.0.0+incompatible

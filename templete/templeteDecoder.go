@@ -2,8 +2,8 @@ package templete
 
 import (
 	"bytes"
-	"github.com/agui2200/GoMybatis/utils"
-	"github.com/agui2200/GoMybatis/xml"
+	"github.com/agui2200/GoMybatisV2/utils"
+	"github.com/agui2200/GoMybatisV2/xml"
 	"github.com/beevik/etree"
 	"reflect"
 	"strconv"

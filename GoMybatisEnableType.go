@@ -1,4 +1,4 @@
-package GoMybatis
+package GoMybatisV2
 
 const GoMybatis_Session_Ptr = `*GoMybatis.Session`
 const GoMybatis_Session = `GoMybatis.Session`

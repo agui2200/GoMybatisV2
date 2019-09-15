@@ -3,9 +3,9 @@ package sessions
 import (
 	"context"
 	"database/sql"
-	"github.com/agui2200/GoMybatis/logger"
-	"github.com/agui2200/GoMybatis/sessions/tx"
-	"github.com/agui2200/GoMybatis/templete/ast"
+	"github.com/agui2200/GoMybatisV2/logger"
+	"github.com/agui2200/GoMybatisV2/sessions/tx"
+	"github.com/agui2200/GoMybatisV2/templete/ast"
 )
 
 type Result struct {

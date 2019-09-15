@@ -1,12 +1,12 @@
-package GoMybatis
+package GoMybatisV2
 
 import (
 	"fmt"
-	"github.com/agui2200/GoMybatis/example"
-	"github.com/agui2200/GoMybatis/sessions"
-	"github.com/agui2200/GoMybatis/sessions/tx"
-	"github.com/agui2200/GoMybatis/templete"
-	"github.com/agui2200/GoMybatis/xml"
+	"github.com/agui2200/GoMybatisV2/example"
+	"github.com/agui2200/GoMybatisV2/sessions"
+	"github.com/agui2200/GoMybatisV2/sessions/tx"
+	"github.com/agui2200/GoMybatisV2/templete"
+	"github.com/agui2200/GoMybatisV2/xml"
 	"testing"
 	"time"
 )

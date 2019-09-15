@@ -48,7 +48,7 @@
  ```
  
 ## 使用教程
-> 教程源码  https://github.com/agui2200/GoMybatis/tree/master/example
+> 教程源码  https://github.com/agui2200/GoMybatisV2/tree/master/example
 
 设置好GoPath,用go get 命令下载GoMybatis和对应的数据库驱动
 ``` bash

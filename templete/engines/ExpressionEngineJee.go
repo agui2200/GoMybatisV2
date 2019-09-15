@@ -3,7 +3,7 @@ package engines
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/utils"
 	"github.com/nytlabs/gojee"
 	"strings"
 )

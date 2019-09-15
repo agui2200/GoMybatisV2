@@ -2,7 +2,7 @@ package logger
 
 import (
 	"bytes"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/utils"
 )
 
 type LogSystem struct {

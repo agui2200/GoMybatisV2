@@ -1,9 +1,9 @@
 package sqlbuilder
 
 import (
-	"github.com/agui2200/GoMybatis/sqlbuilder/cache"
-	"github.com/agui2200/GoMybatis/templete/ast"
-	"github.com/agui2200/GoMybatis/utils"
+	"github.com/agui2200/GoMybatisV2/sqlbuilder/cache"
+	"github.com/agui2200/GoMybatisV2/templete/ast"
+	"github.com/agui2200/GoMybatisV2/utils"
 )
 
 type ExpressionEngineProxy struct {

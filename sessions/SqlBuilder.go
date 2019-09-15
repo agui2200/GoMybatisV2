@@ -1,8 +1,8 @@
 package sessions
 
 import (
-	"github.com/agui2200/GoMybatis/sqlbuilder"
-	"github.com/agui2200/GoMybatis/templete/ast"
+	"github.com/agui2200/GoMybatisV2/sqlbuilder"
+	"github.com/agui2200/GoMybatisV2/templete/ast"
 )
 
 //sql文本构建

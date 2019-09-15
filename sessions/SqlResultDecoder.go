@@ -1,6 +1,6 @@
 package sessions
 
-import "github.com/agui2200/GoMybatis/sqlbuilder"
+import "github.com/agui2200/GoMybatisV2/sqlbuilder"
 
 //sql查询结果解码
 type SqlResultDecoder interface {
