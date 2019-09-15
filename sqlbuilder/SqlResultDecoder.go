@@ -1,7 +1,6 @@
 package sqlbuilder
 
 import (
-	"fmt"
 	"github.com/agui2200/GoMybatisV2/utils"
 	"reflect"
 	"strconv"
@@ -45,7 +44,6 @@ func (it GoMybatisSqlResultDecoder) Decode(resultMap map[string]*ResultProperty,
 }
 
 func (it GoMybatisSqlResultDecoder) sqlStructConvert(resultMap map[string]*ResultProperty, resultTItemType reflect.Type, sItemMap map[string][]byte) reflect.Value {
-	fmt.Println("resultMap:", resultMap, "sItemMap:", sItemMap)
 	if resultTItemType.Kind() == reflect.Struct {
 		var tItemTypeFieldTypeValue = reflect.New(resultTItemType)
 		for i := 0; i < resultTItemType.NumField(); i++ {
@@ -219,7 +217,6 @@ func (it GoMybatisSqlResultDecoder) isGoBasicType(tItemTypeFieldType reflect.Typ
 
 //resultV:  struct,int,float,map[string]string,[]string,[]struct
 func (it GoMybatisSqlResultDecoder) convertToBasicTypeCollection(sourceMap map[string][]byte, resultV *reflect.Value, resultMap map[string]*ResultProperty) {
-	fmt.Println("on resultMap:", resultMap)
 	var isSlice = resultV.Type().Kind() == reflect.Slice
 	var isMap = resultV.Type().Kind() == reflect.Map
 	var isBasicType = it.isGoBasicType(resultV.Type())
