@@ -226,6 +226,11 @@ func (it *GoMybatisTempleteDecoder) Decode(method *reflect.StructField, mapper *
 					tempElement.Child = append(tempElement.Child, &etree.CharData{
 						Data: " now() ,",
 					})
+					continue
+				}
+				// 新增数据时，没有更新时间
+				if enableAutoTimestamps && v.SelectAttrValue("property", "") == autoTimestamps[_sqlUpdated].Property {
+					continue
 				}
 				if enableSoftDelete && v.SelectAttrValue("property", "") == autoTimestamps[_sqlDeleted].Property {
 					continue
@@ -270,6 +275,10 @@ func (it *GoMybatisTempleteDecoder) Decode(method *reflect.StructField, mapper *
 					trimColumn.Child = append(trimColumn.Child, &etree.CharData{
 						Data: autoTimestamps[_sqlCreated].Column + ",",
 					})
+					continue
+				}
+				// 新增数据时，没有更新时间
+				if enableAutoTimestamps && v.SelectAttrValue("property", "") == autoTimestamps[_sqlUpdated].Property {
 					continue
 				}
 				if enableSoftDelete && v.SelectAttrValue("property", "") == autoTimestamps[_sqlDeleted].Property {
@@ -362,6 +371,11 @@ func (it *GoMybatisTempleteDecoder) Decode(method *reflect.StructField, mapper *
 						continue
 					}
 					columns += v.SelectAttrValue("property", "") + "?" + v.SelectAttrValue("column", "") + " = #{" + v.SelectAttrValue("property", "") + "},"
+				}
+				if enableAutoTimestamps && v.SelectAttrValue("property", "") == autoTimestamps[_sqlUpdated].Property {
+					mapper.Child = append(mapper.Child, &etree.CharData{
+						Data: autoTimestamps[_sqlUpdated].Column + " = now()" + ",",
+					})
 				}
 			}
 			columns = strings.Trim(columns, ",")

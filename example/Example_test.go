@@ -308,7 +308,7 @@ func TestInsertTemplete(t *testing.T) {
 		return
 	}
 	//使用mapper
-	var result, err = exampleActivityMapper.InsertTemplete(Activity{Id: "179", Name: "test_insret", PcLink: "www.163.com", CreateTime: time.Now(), DeleteFlag: 1})
+	var result, err = exampleActivityMapper.InsertTemplete(Activity{Id: "181", Name: "test_insret", PcLink: "www.163.com", DeleteFlag: 1})
 	if err != nil {
 		panic(err)
 	}
@@ -350,9 +350,9 @@ func TestUpdateTemplete(t *testing.T) {
 		return
 	}
 	var activityBean = Activity{
-		Id:      "171",
+		Id:      "181",
 		Name:    "rs168",
-		Version: 2,
+		Version: 1,
 	}
 	//会自动生成乐观锁和逻辑删除字段 set version= * where version = * and delete_flag = *
 	// update set name = 'rs168',version = 1 from biz_activity where name = 'rs168' and delete_flag = 1 and version = 0

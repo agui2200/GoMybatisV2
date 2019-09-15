@@ -16,6 +16,6 @@ type Activity struct {
 	H5Link     string    `json:"h5Link"`
 	Remark     string    `json:"remark"`
 	Version    int       `json:"version"`
-	CreateTime time.Time `json:"createTime"`
+	CreateTime time.Time `json:"createdAt"`
 	DeleteFlag int       `json:"deleteFlag"`
 }

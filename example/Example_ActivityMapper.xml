@@ -14,7 +14,8 @@
         <result column="remark" property="remark" langType="string"/>
         <result column="version" property="version" langType="int"
                 version_enable="true"/>
-        <result column="create_time" property="createTime" langType="time.Time"/>
+        <result property="createdAt" langType="time.Time"/>
+        <result property="updatedAt" langType="time.Time"/>
         <result column="delete_flag" property="deleteFlag" langType="int"
                 logic_enable="true"
                 logic_undelete="1"
