@@ -186,7 +186,7 @@ func TestGoMybatisTempleteDecoder_Create(t *testing.T) {
 		H5Link:     "h5",
 		Remark:     "remark",
 		Version:    0,
-		CreateTime: time.Now(),
+		CreatedAt:  time.Now(),
 		DeleteFlag: 1,
 	}
 	var args = []example.Activity{

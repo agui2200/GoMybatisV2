@@ -105,7 +105,7 @@ func Test_inset(t *testing.T) {
 		return
 	}
 	//使用mapper
-	var result, err = exampleActivityMapper.Insert(Activity{Id: "171", Name: "test_insret", CreateTime: time.Now(), DeleteFlag: 1})
+	var result, err = exampleActivityMapper.Insert(Activity{Id: "171", Name: "test_insret", DeleteFlag: 1})
 	if err != nil {
 		panic(err)
 	}
@@ -282,7 +282,7 @@ func TestSelectTemplete(t *testing.T) {
 	}
 	ctx := context.WithValue(context.TODO(), "test", "testval")
 	//使用mapper
-	var result, err = exampleActivityMapper.SelectTemplete(ctx, "hello")
+	var result, err = exampleActivityMapper.SelectTemplete(ctx, "rs168")
 	if err != nil {
 		panic(err)
 	}

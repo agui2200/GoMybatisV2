@@ -9,13 +9,14 @@ const MysqlUri = "root:root@(10.16.0.23:3306)/test"
 //定义数据库模型
 //例子：Activity 活动数据
 type Activity struct {
-	Id         string    `json:"id"`
-	Uuid       string    `json:"uuid"`
-	Name       string    `json:"name"`
-	PcLink     string    `json:"pcLink"`
-	H5Link     string    `json:"h5Link"`
-	Remark     string    `json:"remark"`
-	Version    int       `json:"version"`
-	CreateTime time.Time `json:"createdAt"`
-	DeleteFlag int       `json:"deleteFlag"`
+	Id         string     `json:"id"`
+	Uuid       string     `json:"uuid"`
+	Name       string     `json:"name"`
+	PcLink     string     `json:"pcLink"`
+	H5Link     string     `json:"h5Link"`
+	Remark     string     `json:"remark"`
+	Version    int        `json:"version"`
+	CreatedAt  *time.Time `json:"created_at"`
+	UpdatedAt  *time.Time `json:"updated_at"`
+	DeleteFlag int        `json:"deleteFlag"`
 }

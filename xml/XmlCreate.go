@@ -38,7 +38,7 @@ type TestActivity struct {
 	H5Link     string    `json:"h5Link"`
 	Remark     string    `json:"remark"`
 	Version    int       `json:"version" gm:"version"`
-	CreateTime time.Time `json:"createTime"`
+	CreatedAt time.Time `json:"createTime"`
 	DeleteFlag int       `json:"deleteFlag" gm:"logic"`
 }
 

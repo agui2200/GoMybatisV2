@@ -50,7 +50,6 @@ func (it GoMybatisSqlResultDecoder) sqlStructConvert(resultMap map[string]*Resul
 			var tItemTypeFieldType = resultTItemType.Field(i)
 			var jsonTag = tItemTypeFieldType.Tag.Get("json")
 			var repleaceName = tItemTypeFieldType.Name
-
 			if tItemTypeFieldType.Type.Kind() != reflect.Ptr {
 				if !it.isGoBasicType(tItemTypeFieldType.Type) {
 					//not basic type,continue
@@ -71,12 +70,15 @@ func (it GoMybatisSqlResultDecoder) sqlStructConvert(resultMap map[string]*Resul
 				}
 				value = sItemMap[repleaceName]
 			}
+
 			if value == nil || len(value) == 0 {
 				// 合并去取
 				if resultValue, o := resultMap[repleaceName]; o {
 					value = sItemMap[resultValue.Column]
 				}
+
 			}
+
 			if value == nil || len(value) == 0 {
 				continue
 			}
@@ -118,7 +120,7 @@ func (it GoMybatisSqlResultDecoder) basicTypeConvert(tItemTypeFieldType reflect.
 		}
 		resultValue.SetFloat(newValue)
 	} else if tItemTypeFieldType.Kind() == reflect.Struct && tItemTypeFieldType.String() == "time.Time" {
-		newValue, e := time.Parse(string(time.RFC3339), value)
+		newValue, e := time.Parse("2006-01-02 15:04:05", value)
 		if e != nil {
 			return false
 		}
