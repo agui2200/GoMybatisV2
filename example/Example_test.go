@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/agui2200/GoMybatis"
+	"github.com/agui2200/GoMybatisV2"
 	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
 	"testing"
@@ -13,18 +13,18 @@ import (
 )
 
 //支持基本类型和指针(int,string,time.Time,float...且需要指定参数名称`mapperParams:"name"以逗号隔开，且位置要和实际参数相同)
-//参数中包含有*GoMybatis.Session的类型，用于自定义事务
+//参数中包含有*GoMybatisV2.Session的类型，用于自定义事务
 //自定义结构体参数（属性必须大写）
 //方法 return 必须包含有error ,为了返回错误信息
 type ExampleActivityMapper struct {
-	GoMybatis.SessionSupport                                                      //session事务操作 写法1.  ExampleActivityMapper.SessionSupport.NewSession()
-	NewSession               func(ctx context.Context) (GoMybatis.Session, error) //session事务操作.写法2   ExampleActivityMapper.NewSession()
+	GoMybatisV2.SessionSupport                                                        //session事务操作 写法1.  ExampleActivityMapper.SessionSupport.NewSession()
+	NewSession                 func(ctx context.Context) (GoMybatisV2.Session, error) //session事务操作.写法2   ExampleActivityMapper.NewSession()
 	//模板示例
 	SelectTemplete      func(ctx context.Context, name string) ([]Activity, error) `mapperParams:"name"` // 参数中加入context以后，如果context里面有span ，则自动开启tracing
 	SelectCountTemplete func(name string) (int64, error)                           `mapperParams:"name"`
 	InsertTemplete      func(arg Activity) (int64, error)
 	InsertTempleteBatch func(args []Activity) (int64, error) `mapperParams:"args"`
-	UpdateTemplete      func(session *GoMybatis.Session, arg Activity) (int64, error)
+	UpdateTemplete      func(session *GoMybatisV2.Session, arg Activity) (int64, error)
 	DeleteTemplete      func(name string) (int64, error) `mapperParams:"name"`
 
 	//传统mybatis示例
@@ -32,7 +32,7 @@ type ExampleActivityMapper struct {
 	SelectByIdMaps    func(ids map[int]string) ([]Activity, error) `mapperParams:"ids"`
 	SelectAll         func() ([]map[string]string, error)
 	SelectByCondition func(name *string, startTime *time.Time, endTime *time.Time, page *int, size *int) ([]Activity, error) `mapperParams:"name,startTime,endTime,page,size"`
-	UpdateById        func(ctx context.Context, session *GoMybatis.Session, arg Activity) (int64, error)
+	UpdateById        func(ctx context.Context, session *GoMybatisV2.Session, arg Activity) (int64, error)
 	Insert            func(arg Activity) (int64, error)
 	CountByCondition  func(name string, startTime time.Time, endTime time.Time) (int, error) `mapperParams:"name,startTime,endTime"`
 	DeleteById        func(id string) (int64, error)                                         `mapperParams:"id"`
@@ -40,7 +40,7 @@ type ExampleActivityMapper struct {
 	SelectLinks       func(column string) ([]Activity, error)                                `mapperParams:"column"`
 }
 
-var engine GoMybatis.GoMybatisEngine
+var engine GoMybatisV2.GoMybatisEngine
 
 //初始化mapper文件和结构体
 var exampleActivityMapper = ExampleActivityMapper{}
@@ -58,10 +58,10 @@ type TestService struct {
 
 func init() {
 	if MysqlUri == "*" {
-		println("GoMybatisEngine not init! because MysqlUri is * or MysqlUri is ''")
+		println("GoMybatisV2Engine not init! because MysqlUri is * or MysqlUri is ''")
 		return
 	}
-	engine = GoMybatis.New()
+	engine = GoMybatisV2.New()
 
 	//mysql链接格式为         用户名:密码@(数据库链接地址:端口)/数据库名称   例如root:123456@(***.mysql.rds.aliyuncs.com:3306)/test
 	_, err := engine.Open("mysql", MysqlUri) //此处请按格式填写你的mysql链接，这里用*号代替
@@ -71,8 +71,8 @@ func init() {
 
 	//动态数据源路由(可选)
 	/**
-	GoMybatis.Open("mysql", MysqlUri)//添加第二个mysql数据库,请把MysqlUri改成你的第二个数据源链接
-	var router = GoMybatis.GoMybatisDataSourceRouter{}.New(func(mapperName string) *string {
+	GoMybatisV2.Open("mysql", MysqlUri)//添加第二个mysql数据库,请把MysqlUri改成你的第二个数据源链接
+	var router = GoMybatisV2.GoMybatisV2DataSourceRouter{}.New(func(mapperName string) *string {
 		//根据包名路由指向数据源
 		if strings.Contains(mapperName, "example.") {
 			var url = MysqlUri//第二个mysql数据库,请把MysqlUri改成你的第二个数据源链接
@@ -87,7 +87,7 @@ func init() {
 	//自定义日志实现(可选)
 	/**
 		engine.SetLogEnable(true)
-		engine.SetLog(&GoMybatis.LogStandard{
+		engine.SetLog(&GoMybatisV2.LogStandard{
 			PrintlnFunc: func(messages []byte) {
 			},
 		})
@@ -189,7 +189,7 @@ func Test_count(t *testing.T) {
 	fmt.Println("result=", result)
 }
 
-//本地GoMybatis使用例子
+//本地GoMybatisV2使用例子
 func Test_ForEach(t *testing.T) {
 	if MysqlUri == "" || MysqlUri == "*" {
 		fmt.Println("no database url define in MysqlConfig.go , you must set the mysql link!")
@@ -204,7 +204,7 @@ func Test_ForEach(t *testing.T) {
 	fmt.Println("result=", result)
 }
 
-//本地GoMybatis使用例子
+//本地GoMybatisV2使用例子
 func Test_ForEach_Map(t *testing.T) {
 	if MysqlUri == "" || MysqlUri == "*" {
 		fmt.Println("no database url define in MysqlConfig.go , you must set the mysql link!")
@@ -430,6 +430,6 @@ func initTestService() TestService {
 			return nil
 		},
 	}
-	GoMybatis.AopProxyService(&testService, &engine)
+	GoMybatisV2.AopProxyService(&testService, &engine)
 	return testService
 }

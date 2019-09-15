@@ -4,6 +4,7 @@ require (
 	github.com/Knetic/govaluate v3.0.0+incompatible
 	github.com/antonmedv/expr v1.1.4
 	github.com/beevik/etree v1.1.0
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gogo/protobuf v1.2.1 // indirect
 	github.com/google/uuid v1.1.1
@@ -14,6 +15,9 @@ require (
 	github.com/nytlabs/gojee v0.0.0-20140331152115-5a79a1542dc0
 	github.com/opentracing/basictracer-go v1.0.0 // indirect
 	github.com/opentracing/opentracing-go v1.1.0
+	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749 // indirect
+	github.com/shurcooL/vfsgen v0.0.0-20181202132449-6a9ea43bcacd // indirect
+	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/zhuxiujia/GoFastExpress v0.0.0-20190224040635-de0d93efb40d
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
