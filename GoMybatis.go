@@ -21,6 +21,10 @@ const (
 	NewSessionFunc = "NewSession" // NewSession method,auto write implement body code
 )
 
+var activeSessionKey = contextKey{}
+
+type contextKey struct{}
+
 type Mapper struct {
 	xml   *etree.Element
 	nodes []ast.Node
@@ -358,7 +362,7 @@ func exeMethodByXml(ctx context.Context, elementType xml.ElementType, beanName s
 	var session sessions.Session
 	var sql string
 	var err error
-	session, sql, err = buildSql(proxyArg, nodes, sessionEngine.SqlBuilder())
+	session, sql, err = buildSql(ctx, proxyArg, nodes, sessionEngine.SqlBuilder())
 	if err != nil {
 		return err
 	}
@@ -374,6 +378,10 @@ func exeMethodByXml(ctx context.Context, elementType xml.ElementType, beanName s
 			goroutineID = 0
 		}
 		session = sessionEngine.GoroutineSessionMap().Get(goroutineID)
+		if session != nil {
+			session.WithContext(ctx)
+		}
+
 	}
 	if session == nil {
 		var s, err = sessionEngine.NewSession(beanName)
@@ -381,9 +389,11 @@ func exeMethodByXml(ctx context.Context, elementType xml.ElementType, beanName s
 			return err
 		}
 		session = s
-		defer session.Close()
+		if session != nil {
+			session.WithContext(ctx)
+			defer session.Close()
+		}
 	}
-	session.WithContext(ctx)
 	var haveLastReturnValue = returnValue != nil && (*returnValue).IsNil() == false
 	//do CRUD
 	if elementType == xml.Element_Select && haveLastReturnValue {
@@ -447,7 +457,7 @@ func closeSession(factory *sessions.SessionFactory, session sessions.Session) {
 	session.Close()
 }
 
-func buildSql(proxyArg ProxyArg, nodes []ast.Node, sqlBuilder sessions.SqlBuilder) (sessions.Session, string, error) {
+func buildSql(ctx context.Context, proxyArg ProxyArg, nodes []ast.Node, sqlBuilder sessions.SqlBuilder) (sessions.Session, string, error) {
 	var session sessions.Session
 	var paramMap = make(map[string]interface{})
 	var tagArgsLen = proxyArg.TagArgsLen
@@ -499,6 +509,10 @@ func buildSql(proxyArg ProxyArg, nodes []ast.Node, sqlBuilder sessions.SqlBuilde
 		paramMap = scanStructArgFields(proxyArg.Args[customIndex], tag)
 	}
 	result, err := sqlBuilder.BuildSql(paramMap, nodes)
+	// 从context里面获取session
+	if session == nil {
+		session = sessionFromCtx(ctx)
+	}
 	return session, result, err
 }
 
@@ -560,4 +574,17 @@ func isDefaultValue(i interface{}) bool {
 		return t.IsZero()
 	}
 	return false
+}
+
+func sessionFromCtx(ctx context.Context) Session {
+	s := ctx.Value(activeSessionKey)
+	if s, o := s.(Session); o {
+		return s
+	}
+	return nil
+}
+
+// 注入session到ctx里面去，这样就可以方便的使用session了
+func InjectSession(ctx context.Context, session Session) context.Context {
+	return context.WithValue(ctx, activeSessionKey, session)
 }

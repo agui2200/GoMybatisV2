@@ -36,6 +36,8 @@ type SessionEngine interface {
 	Name() string
 	//创建session
 	NewSession(mapperName string) (Session, error)
+
+	NewSessionWithContext(ctx context.Context, mapperName string) (Session, error)
 	//获取数据源路由
 	DataSourceRouter() DataSourceRouter
 	//设置数据源路由

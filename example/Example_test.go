@@ -239,7 +239,8 @@ func Test_local_Transation(t *testing.T) {
 		Id:   "170",
 		Name: "rs168-8",
 	}
-	var updateNum, e = exampleActivityMapper.UpdateById(ctx, &session, activityBean) //sessionId 有值则使用已经创建的session，否则新建一个session
+	ctx = GoMybatisV2.InjectSession(ctx, session)
+	var updateNum, e = exampleActivityMapper.UpdateById(ctx, nil, activityBean) //sessionId 有值则使用已经创建的session，否则新建一个session
 	fmt.Println("updateNum=", updateNum)
 	if e != nil {
 		panic(e)

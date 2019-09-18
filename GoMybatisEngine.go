@@ -1,6 +1,7 @@
 package GoMybatisV2
 
 import (
+	"context"
 	"database/sql"
 	"github.com/agui2200/GoMybatisV2/logger"
 	"github.com/agui2200/GoMybatisV2/sessions"
@@ -104,6 +105,15 @@ func (it *GoMybatisEngine) NewSession(mapperName string) (sessions.Session, erro
 	it.initCheck()
 	var session, err = it.DataSourceRouter().Router(mapperName, it)
 	return session, err
+}
+
+func (it *GoMybatisEngine) NewSessionWithContext(ctx context.Context, mapperName string) (sessions.Session, error) {
+	s, err := it.NewSession(mapperName)
+	if err != nil {
+		return nil, err
+	}
+	s.WithContext(ctx)
+	return s, nil
 }
 
 //获取日志实现类，是否启用日志
